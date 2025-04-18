@@ -314,6 +314,9 @@ export default defineComponent({
       props.mode === 'horizontal'
         ? withDirectives(vnode, [[Resize, handleResize]])
         : vnode
+
+    const ulStyle = useMenuCssVar(props)
+
     return () => {
       let slot = slots.default?.() ?? []
       const vShowMore: VNode[] = []
@@ -367,8 +370,6 @@ export default defineComponent({
           )
         }
       }
-
-      const ulStyle = useMenuCssVar(props)
 
       const resizeMenu = (vNode: VNode) =>
         props.ellipsis ? useVNodeResize(vNode) : vNode

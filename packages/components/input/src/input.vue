@@ -443,16 +443,14 @@ watch(
   }
 )
 
-onMounted(async () => {
+onMounted(() => {
   setNativeInputValue()
   updateIconOffset()
-  await nextTick()
-  resizeTextarea()
+  nextTick(resizeTextarea)
 })
 
-onUpdated(async () => {
-  await nextTick()
-  updateIconOffset()
+onUpdated(() => {
+  nextTick(updateIconOffset)
 })
 
 defineExpose({

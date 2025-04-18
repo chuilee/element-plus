@@ -94,6 +94,13 @@ export function useOption(props, states) {
     () => props.value,
     (val, oldVal) => {
       const { remote, valueKey } = select.props
+
+      const shouldUpdate = remote ? val !== oldVal : !isEqual(val, oldVal)
+      if (shouldUpdate) {
+        select.onOptionDestroy(oldVal, instance.proxy)
+        select.onOptionCreate(instance.proxy)
+      }
+
       if (!props.created && !remote) {
         if (
           valueKey &&

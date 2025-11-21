@@ -1,13 +1,13 @@
 <template>
   <div
     ref="selectWrapper"
-    v-click-outside:[popperPaneRef]="handleClose"
+    v-click-outside="onClickOutside"
     :class="wrapperKls"
     @click.stop="toggleMenu"
   >
     <el-tooltip
       ref="tooltipRef"
-      v-model:visible="dropMenuVisible"
+      :visible="dropMenuVisible"
       placement="bottom-start"
       :teleported="compatTeleported"
       :popper-class="[nsSelect.e('popper'), popperClass]"
@@ -588,6 +588,13 @@ export default defineComponent({
       'popperAppendToBody'
     )
 
+    function onClickOutside(e: MouseEvent) {
+      const pane = unref(popperPaneRef)
+      // 如果点击在 popper pane 内则忽略
+      if (pane && pane.contains(e.target as Node)) return
+      handleClose(e)
+    }
+
     return {
       tagInMultiLine,
       prefixWidth,
@@ -653,6 +660,8 @@ export default defineComponent({
       selectTagsStyle,
       compatTeleported,
       nsSelect,
+
+      onClickOutside,
     }
   },
 })

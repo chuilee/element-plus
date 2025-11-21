@@ -78,3 +78,11 @@ export type UsePopperContentProps = ExtractPropTypes<
 export type UsePopperCoreConfigProps = ExtractPropTypes<
   typeof usePopperCoreConfigProps
 >
+
+export const popperContentEmits = {
+  mouseenter: (evt: MouseEvent) => evt instanceof MouseEvent,
+  mouseleave: (evt: MouseEvent) => evt instanceof MouseEvent,
+  focus: () => true,
+  blur: () => true,
+  close: () => true,
+}

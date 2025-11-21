@@ -19,7 +19,7 @@ export const buildPopperOptions = (
     placement,
     strategy,
     ...popperOptions,
-    modifiers: genModifiers(props),
+    modifiers: [...genModifiers(props)],
   }
 
   attachArrow(options, arrowProps)
